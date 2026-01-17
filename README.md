@@ -2,6 +2,25 @@
 
 Sistema automatizado para análisis de expedientes de estudio de títulos en Colombia usando AWS Bedrock Agents.
 
+## 🚀 Quick Start
+
+```bash
+# 1. Configurar
+export AWS_REGION=us-east-1
+export ENVIRONMENT=dev
+
+# 2. Desplegar (5-10 minutos)
+chmod +x deploy.sh scripts/*.sh
+./deploy.sh
+
+# 3. Ver outputs
+cat outputs/dev.json
+```
+
+**¡Listo!** Tu plataforma está funcionando en AWS.
+
+Ver [QUICKSTART.md](QUICKSTART.md) para guía completa.
+
 ## 🎯 Objetivo del MVP
 
 Convertir expedientes de estudio de títulos en:
@@ -71,24 +90,52 @@ Ver documentación detallada en:
 
 ## 📖 Documentación
 
-Ver carpeta `/docs` para:
-- Guías de implementación
-- ADRs (decisiones arquitectónicas)
-- Runbooks operacionales
-- API contracts (OpenAPI)
+- **[QUICKSTART.md](QUICKSTART.md)** - Guía rápida de deployment y uso
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Guía detallada de deployment
+- **[RESUMEN_EJECUTIVO.md](RESUMEN_EJECUTIVO.md)** - Resumen ejecutivo completo
+- **[docs/architecture-functional.md](docs/architecture-functional.md)** - Arquitectura funcional
+- **[docs/architecture-technical.md](docs/architecture-technical.md)** - Arquitectura técnica AWS
 
-## 🛠️ Desarrollo
+## � Costos
+
+**MVP (100 casos/mes)**: ~$86-165/mes
+
+Incluye: Lambda, DynamoDB, S3, API Gateway, Bedrock, Textract, Step Functions, Amplify
+
+## 🛠️ Comandos Útiles
 
 ```bash
-# Instalar dependencias
-npm install
+# Deployment completo
+./deploy.sh
 
-# Deploy infraestructura
-cd infra && npm run deploy
+# Deployment por componentes
+bash scripts/deploy-iam.sh
+bash scripts/deploy-s3.sh
+bash scripts/deploy-dynamodb.sh
+bash scripts/deploy-lambdas.sh
+bash scripts/deploy-api.sh
+bash scripts/deploy-bedrock-agents.sh
+bash scripts/deploy-stepfunctions.sh
+bash scripts/deploy-amplify.sh
 
-# Tests
-npm test
+# Ver logs
+aws logs tail /aws/lambda/${STACK_NAME}-api-cases --follow
+
+# Limpiar recursos
+./scripts/cleanup.sh
 ```
+
+## 🎯 Características
+
+- ✅ API REST completa (8 endpoints)
+- ✅ Autenticación Cognito (MFA)
+- ✅ Bedrock Agent Orchestrator
+- ✅ Step Functions workflow (9 fases)
+- ✅ OCR con Textract
+- ✅ Encriptación KMS
+- ✅ Auditoría CloudTrail
+- ✅ WAF habilitado
+- ✅ Frontend Next.js + Amplify
 
 ## 📝 Licencia
 
